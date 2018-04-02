@@ -115,6 +115,11 @@ namespace('Ajacs', function (root)
 		return this._requestType;
 	};
 	
+	Request.prototype.isPostRequest = function ()
+	{
+		return this._requestType === HttpMethod.POST;
+	};
+	
 	
 	this.Request = Request;
 });

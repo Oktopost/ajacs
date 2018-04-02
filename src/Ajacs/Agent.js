@@ -1,7 +1,6 @@
 namespace('Ajacs', function (root)
 {
 	var Event		= root.Duct.Event;
-	var HttpMethod	= root.Ajacs.HttpMethod;
 	var classify	= root.Classy.classify;
 	var is			= root.Plankton.is;
 	var func		= root.Plankton.func;
@@ -62,7 +61,7 @@ namespace('Ajacs', function (root)
 			beforeSend:	this._triggerBeforeSend
 		};
 		
-		if (request.hasBody() && type === HttpMethod.POST)
+		if (request.hasBody() && result.isPostRequest())
 			result.contentType = request.getContentType();
 		
 		return result;
