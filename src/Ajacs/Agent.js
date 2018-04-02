@@ -61,7 +61,7 @@ namespace('Ajacs', function (root)
 			beforeSend:	this._triggerBeforeSend
 		};
 		
-		if (request.hasBody() && result.isPostRequest())
+		if (request.hasBody() && request.isPostRequest())
 			result.contentType = request.getContentType();
 		
 		return result;
