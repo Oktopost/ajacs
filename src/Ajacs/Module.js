@@ -7,6 +7,8 @@ namespace('Ajacs', function (root)
 	var is			= root.Plankton.is;
 	var foreach		= root.Plankton.foreach;
 	
+	var HttpMethod	= root.Ajacs.HttpMethod;
+	
 	
 	/**
 	 * @class Module
