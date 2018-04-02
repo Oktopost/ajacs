@@ -83,11 +83,13 @@ namespace('Ajacs', function (root)
 		return {
 			get: function (url, params)
 				 {
-					 return module.getAgent(action).get(new Request().setUrl(url).setBody(params));
+					 return module.getAgent(action)
+					 	.send(new Request().setUrl(url).setBody(params).setRequestType(HttpMethod.GET));
 				 },
 			post: function (url, params)
 				 {
-					 return module.getAgent(action).post(new Request().setUrl(url).setBody(params));
+					 return module.getAgent(action)
+					 	.send(new Request().setUrl(url).setBody(params).setRequestType(HttpMethod.POST));
 				 },
 			getAgent: function ()
 				 {

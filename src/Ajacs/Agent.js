@@ -48,14 +48,13 @@ namespace('Ajacs', function (root)
 	
 	/**
 	 * @param {Ajacs.Request} request
-	 * @param {string} type
-	 * @return {{type: *, url: *, dataType: *, data: *, headers: *, beforeSend: _triggerBeforeSend|*}}
+	 * @return {{type: *, url: *, dataType: *, data: *, headers: *, beforeSend: (function(*=, *=): boolean)|*}}
 	 * @private
 	 */
-	Agent.prototype._prepareRequestOptions = function (request, type)
+	Agent.prototype._prepareRequestOptions = function (request)
 	{
 		var result = {
-			type: 		type,
+			type: 		request.getRequestType(),
 			url: 		request.getUrl(),
 			dataType:	request.getDataType(),
 			data:		request.getBody(),
@@ -121,19 +120,9 @@ namespace('Ajacs', function (root)
 	 * @param {Ajacs.Request} request
 	 * @return {Agent}
 	 */
-	Agent.prototype.get = function (request)
+	Agent.prototype.send = function (request)
 	{
-		this._sendRequestAsync(this._prepareRequestOptions(request, HttpMethod.GET));
-		return this;
-	};
-	
-	/**
-	 * @param {Ajacs.Request} request
-	 * @return {Agent}
-	 */
-	Agent.prototype.post = function (request)
-	{
-		this._sendRequestAsync(this._prepareRequestOptions(request, HttpMethod.POST));
+		this._sendRequestAsync(this._prepareRequestOptions(request));
 		return this;
 	};
 	

@@ -3,6 +3,7 @@ namespace('Ajacs', function (root)
 	var classify	= root.Classy.classify;
 	var is			= root.Plankton.is;
 	var foreach		= root.Plankton.foreach;
+	var HttpMethod	= root.Ajacs.HttpMethod;
 	
 	
 	/**
@@ -15,6 +16,7 @@ namespace('Ajacs', function (root)
 		classify(this);
 		
 		this._url			= null;
+		this._requestType	= HttpMethod.GET;
 		this._headers		= {};
 		this._body			= {};
 		this._dataType		= 'json';
@@ -100,6 +102,17 @@ namespace('Ajacs', function (root)
 	Request.prototype.getContentType = function ()
 	{
 		return this._contentType;
+	};
+	
+	Request.prototype.setRequestType = function (type)
+	{
+		this._requestType = type;
+		return this;
+	};
+	
+	Request.prototype.getRequestType = function ()
+	{
+		return this._requestType;
 	};
 	
 	
