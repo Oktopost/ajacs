@@ -5,7 +5,9 @@ namespace('Ajacs', function (root)
 	
 	var HttpMethod = {
 		GET: 	'GET',
-		POST: 	'POST'
+		POST: 	'POST',
+		DELETE:	'DELETE',
+		PUT:	'PUT'
 	};
 	
 	this.HttpMethod = Enum(HttpMethod);

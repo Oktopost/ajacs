@@ -93,6 +93,11 @@ namespace('Ajacs', function (root)
 					 return module.getAgent(action)
 					 	.send(new Request().setUrl(url).setBody(params).setRequestType(HttpMethod.POST));
 				 },
+			delete: function (url, params)
+				 {
+					  return module.getAgent(action)
+					  	.send(new Request().setUrl(url).setBody(params).setRequestType(HttpMethod.DELETE));
+				 },
 			getAgent: function ()
 				 {
 					 return module.getAgent(action);
