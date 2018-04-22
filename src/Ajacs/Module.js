@@ -84,27 +84,32 @@ namespace('Ajacs', function (root)
 		
 		return {
 			get: function (url, params)
-				 {
-					 return module.getAgent(action)
-					 	.send(new Request().setUrl(url).setBody(params).setRequestType(HttpMethod.GET));
-				 },
+			{
+				return module.getAgent(action)
+					.send(new Request().setUrl(url).setBody(params).setRequestType(HttpMethod.GET));
+			},
 			post: function (url, params)
-				 {
-					 return module.getAgent(action)
-					 	.send(new Request().setUrl(url).setBody(params).setRequestType(HttpMethod.POST));
-				 },
+			{
+				return module.getAgent(action)
+					.send(new Request().setUrl(url).setBody(params).setRequestType(HttpMethod.POST));
+			},
 			delete: function (url, params)
-				 {
-					  return module.getAgent(action)
-					  	.send(new Request().setUrl(url).setBody(params).setRequestType(HttpMethod.DELETE));
-				 },
+			{
+				return module.getAgent(action)
+					.send(new Request().setUrl(url).setBody(params).setRequestType(HttpMethod.DELETE));
+			},
+			put: function (url, params)
+			{
+				return module.getAgent(action)
+					.send(new Request().setUrl(url).setBody(params).setRequestType(HttpMethod.PUT));
+			},
 			getAgent: function ()
-				 {
-					 return module.getAgent(action);
-				 }
+			{
+				return module.getAgent(action);
+			}
 		}
 	};
-	
+
 	
 	this.Module = Module;
 });
