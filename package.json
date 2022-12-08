@@ -1,6 +1,6 @@
 {
   "name": "oktopost-ajacs",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "AJAx CoSmic ray module",
   "main": "index.js",
   "scripts": {

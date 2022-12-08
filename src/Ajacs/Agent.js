@@ -20,6 +20,7 @@ namespace('Ajacs', function (root)
 		this._onFail 		= new Event('AjacsAgent.onFail');
 		this._onComplete 	= new Event('AjacsAgent.onComplete');
 		this._onBeforeSend 	= new Event('AjacsAgent.onBeforeSend');
+		this._onProgress	= new Event('AjaxsAgent.onProgress')
 		
 		this._headers 	= {};
 		this._LT		= LT || null;
@@ -52,12 +53,26 @@ namespace('Ajacs', function (root)
 	 */
 	Agent.prototype._prepareRequestOptions = function (request)
 	{
+		var progress = this._onProgress;
 		var result = {
 			type: 		request.getRequestType(),
 			url: 		request.getUrl(),
 			dataType:	request.getDataType(),
 			data:		request.getBody(),
 			headers:	request.getHeaders(),
+			xhr:		function ()
+						 {
+							 var result = '';
+							 var xhr = new window.XMLHttpRequest();
+							 xhr.addEventListener("progress", function (e)
+							 {
+								 var newData = e.currentTarget.response.substring(result.length);
+								 result = e.currentTarget.response;
+								 progress.trigger(e.currentTarget.headers, newData);
+							 }, false);
+					   
+							 return xhr;
+						 },
 			beforeSend:	this._triggerBeforeSend
 		};
 		
@@ -114,6 +129,12 @@ namespace('Ajacs', function (root)
 		this._subscribeToEvent(this._onBeforeSend, item, callback);
 		return this;
 	};
+	
+	Agent.prototype.onProgress = function (item, callback)
+	{
+		this._subscribeToEvent(this._onProgress, item, callback)
+		return this;
+	}
 	
 	/**
 	 * @param {Ajacs.Request} request
