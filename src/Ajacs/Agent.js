@@ -68,7 +68,7 @@ namespace('Ajacs', function (root)
 							 {
 								 var newData = e.currentTarget.response.substring(result.length);
 								 result = e.currentTarget.response;
-								 progress.trigger(e.currentTarget.headers, newData);
+								 progress.trigger(newData, e.currentTarget.headers);
 							 }, false);
 					   
 							 return xhr;
