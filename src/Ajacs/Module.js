@@ -68,48 +68,57 @@ namespace('Ajacs', function (root)
 		return this;
 	};
 	
-	Module.prototype.getAgent = function (action)
+	Module.prototype.getAgent = function (action, decorators)
 	{
-		var result = new Agent(action);
+		const result = new Agent(action);
 		
-		if (is(this._decorators))
+		if (is.defined(decorators))
+		{
+			if (is(decorators))
+			{
+				this.addDecorator(decorators)
+			}
+		}
+		else if (is(this._decorators))
+		{
 			this._decorate(result);
+		}
 		
 		return result;
 	};
 	
-	Module.prototype.builder = function (action)
+	Module.prototype.builder = function (action, decorators)
 	{
-		var module = this;
+		const module = this;
 		
 		return {
 			get: function (url, params)
 			{
-				return module.getAgent(action)
+				return module.getAgent(action, decorators)
 					.send(new Request().setUrl(url).setBody(params).setRequestType(HttpMethod.GET));
 			},
 			post: function (url, params)
 			{
-				return module.getAgent(action)
+				return module.getAgent(action, decorators)
 					.send(new Request().setUrl(url).setBody(params).setRequestType(HttpMethod.POST));
 			},
 			delete: function (url, params)
 			{
-				return module.getAgent(action)
+				return module.getAgent(action, decorators)
 					.send(new Request().setUrl(url).setBody(params).setRequestType(HttpMethod.DELETE));
 			},
 			put: function (url, params)
 			{
-				return module.getAgent(action)
+				return module.getAgent(action, decorators)
 					.send(new Request().setUrl(url).setBody(params).setRequestType(HttpMethod.PUT));
 			},
 			getAgent: function ()
 			{
-				return module.getAgent(action);
+				return module.getAgent(action, decorators);
 			}
 		}
 	};
-
+	
 	
 	this.Module = Module;
 });
